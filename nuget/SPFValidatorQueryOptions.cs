@@ -12,7 +12,6 @@ namespace APIVerve.API.SPFValidator
     {
         /// <summary>
         /// The domain to validate the SPF record for
-        /// Example: myspace.com
         /// </summary>
         [JsonProperty("domain")]
         public string Domain { get; set; }
