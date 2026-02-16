@@ -499,8 +499,9 @@ from apiverve_spfvalidator.apiClient import SpfvalidatorAPIClient
 
 api = SpfvalidatorAPIClient("[YOUR_API_KEY]")
 
+query = { "domain": "myspace.com" }
+
 try:
-    query = { "domain": "myspace.com" }
     result = api.execute(query)
     print(result)
 finally:
