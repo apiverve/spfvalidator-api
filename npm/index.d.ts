@@ -4,40 +4,56 @@ declare module '@apiverve/spfvalidator' {
     secure?: boolean;
   }
 
+  /**
+   * Describes fields the current plan does not unlock. Locked fields arrive as null
+   * in `data`; `locked_fields` names them, using dot paths for nested fields.
+   * Absent when the plan unlocks everything.
+   */
+  export interface PremiumInfo {
+    message: string;
+    upgrade_url: string;
+    locked_fields: string[];
+  }
+
   export interface spfvalidatorResponse {
     status: string;
     error: string | null;
     data: SPFValidatorData;
     code?: number;
+    premium?: PremiumInfo;
   }
 
 
   interface SPFValidatorData {
-      authorizedIPS:    AuthorizedIPS;
-      dnsLookupsNum:    number;
-      domainsExtracted: string[];
-      elapsedMS:        number;
-      hasIssues:        boolean;
-      hasSPFRecord:     boolean;
-      host:             string;
-      ipPass:           boolean;
-      macrosFound:      boolean;
-      spfRecord:        string;
+      host:             null | string;
+      hasSPFRecord:     boolean | null;
+      dnsLookupsNum:    number | null;
+      spfRecord:        null | string;
       spfRecordsList:   SPFRecordsList[];
-      spfValid:         boolean;
-  }
-  
-  interface AuthorizedIPS {
-      ipv4: string[];
+      domainsExtracted: (null | string)[];
+      authorizedIPS:    { [key: string]: (null | string)[] };
+      issuesFound:      any[];
+      spfValid:         boolean | null;
+      hasIssues:        boolean | null;
+      macrosFound:      boolean | null;
+      ipPass:           boolean | null;
+      elapsedMS:        number | null;
+      allQualifier:     null | string;
+      riskScore:        number | null;
+      riskLevel:        null | string;
   }
   
   interface SPFRecordsList {
+      origin:         null | string;
+      record:         null | string;
+      charsNum:       number | null;
+      useMacro:       boolean | null;
+      domains?:       (null | string)[];
       authorizedIPS?: AuthorizedIPS;
-      charsNum:       number;
-      domains?:       string[];
-      origin:         string;
-      record:         string;
-      useMacro:       boolean;
+  }
+  
+  interface AuthorizedIPS {
+      ipv4: (null | string)[];
   }
 
   export default class spfvalidatorWrapper {
