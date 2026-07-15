@@ -22,7 +22,7 @@ paths:
       summary: Validate SPF Record & Test IP Authorization
       description: >-
         SPF Validator checks the Sender Policy Framework (SPF) DNS record for a
-        domain to verify if it’s valid and optionally whether a given IP address
+        domain to verify if it's valid and optionally whether a given IP address
         is authorized to send emails for that domain.
       operationId: spfvalidator
       parameters:
@@ -396,6 +396,9 @@ paths:
                   macros_found: false
                   ip_pass: false
                   elapsed_ms: 431
+                  all_qualifier: fail
+                  risk_score: 5
+                  risk_level: low
         '401':
           description: Your request was not authorized, or your API Key was invalid
         '404':
