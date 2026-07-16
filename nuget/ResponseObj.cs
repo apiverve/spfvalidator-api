@@ -25,36 +25,21 @@ namespace APIVerve.API.SPFValidator
 
         [JsonProperty("data")]
         public Data Data { get; set; }
+
+        [JsonProperty("premium")]
+        public Premium Premium { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("authorized_ips")]
-        public AuthorizedIps AuthorizedIps { get; set; }
-
-        [JsonProperty("dns_lookups_num")]
-        public long DnsLookupsNum { get; set; }
-
-        [JsonProperty("domains_extracted")]
-        public string[] DomainsExtracted { get; set; }
-
-        [JsonProperty("elapsed_ms")]
-        public long ElapsedMs { get; set; }
-
-        [JsonProperty("has_issues")]
-        public bool HasIssues { get; set; }
-
-        [JsonProperty("has_spf_record")]
-        public bool HasSpfRecord { get; set; }
-
         [JsonProperty("host")]
         public string Host { get; set; }
 
-        [JsonProperty("ip_pass")]
-        public bool IpPass { get; set; }
+        [JsonProperty("has_spf_record")]
+        public bool? HasSpfRecord { get; set; }
 
-        [JsonProperty("macros_found")]
-        public bool MacrosFound { get; set; }
+        [JsonProperty("dns_lookups_num")]
+        public long? DnsLookupsNum { get; set; }
 
         [JsonProperty("spf_record")]
         public string SpfRecord { get; set; }
@@ -62,8 +47,59 @@ namespace APIVerve.API.SPFValidator
         [JsonProperty("spf_records_list")]
         public SpfRecordsList[] SpfRecordsList { get; set; }
 
+        [JsonProperty("domains_extracted")]
+        public string[] DomainsExtracted { get; set; }
+
+        [JsonProperty("authorized_ips")]
+        public Dictionary<string, string[]> AuthorizedIps { get; set; }
+
+        [JsonProperty("issues_found")]
+        public object[] IssuesFound { get; set; }
+
         [JsonProperty("spf_valid")]
-        public bool SpfValid { get; set; }
+        public bool? SpfValid { get; set; }
+
+        [JsonProperty("has_issues")]
+        public bool? HasIssues { get; set; }
+
+        [JsonProperty("macros_found")]
+        public bool? MacrosFound { get; set; }
+
+        [JsonProperty("ip_pass")]
+        public bool? IpPass { get; set; }
+
+        [JsonProperty("elapsed_ms")]
+        public long? ElapsedMs { get; set; }
+
+        [JsonProperty("all_qualifier")]
+        public string AllQualifier { get; set; }
+
+        [JsonProperty("risk_score")]
+        public long? RiskScore { get; set; }
+
+        [JsonProperty("risk_level")]
+        public string RiskLevel { get; set; }
+    }
+
+    public partial class SpfRecordsList
+    {
+        [JsonProperty("origin")]
+        public string Origin { get; set; }
+
+        [JsonProperty("record")]
+        public string Record { get; set; }
+
+        [JsonProperty("chars_num")]
+        public long? CharsNum { get; set; }
+
+        [JsonProperty("use_macro")]
+        public bool? UseMacro { get; set; }
+
+        [JsonProperty("domains", NullValueHandling = NullValueHandling.Ignore)]
+        public string[] Domains { get; set; }
+
+        [JsonProperty("authorized_ips", NullValueHandling = NullValueHandling.Ignore)]
+        public AuthorizedIps AuthorizedIps { get; set; }
     }
 
     public partial class AuthorizedIps
@@ -72,24 +108,15 @@ namespace APIVerve.API.SPFValidator
         public string[] Ipv4 { get; set; }
     }
 
-    public partial class SpfRecordsList
+    public partial class Premium
     {
-        [JsonProperty("authorized_ips", NullValueHandling = NullValueHandling.Ignore)]
-        public AuthorizedIps AuthorizedIps { get; set; }
+        [JsonProperty("message")]
+        public string Message { get; set; }
 
-        [JsonProperty("chars_num")]
-        public long CharsNum { get; set; }
+        [JsonProperty("upgrade_url")]
+        public Uri UpgradeUrl { get; set; }
 
-        [JsonProperty("domains", NullValueHandling = NullValueHandling.Ignore)]
-        public string[] Domains { get; set; }
-
-        [JsonProperty("origin")]
-        public string Origin { get; set; }
-
-        [JsonProperty("record")]
-        public string Record { get; set; }
-
-        [JsonProperty("use_macro")]
-        public bool UseMacro { get; set; }
+        [JsonProperty("locked_fields")]
+        public string[] LockedFields { get; set; }
     }
 }
