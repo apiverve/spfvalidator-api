@@ -19,7 +19,7 @@ servers:
 paths:
   /v1/spfvalidator:
     get:
-      summary: Validate SPF Record & Test IP Authorization
+      summary: SPF Validator
       description: >-
         SPF Validator checks the Sender Policy Framework (SPF) DNS record for a
         domain to verify if it's valid and optionally whether a given IP address
